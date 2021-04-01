@@ -68,3 +68,12 @@ class Vector:
         return "(" + str(self.x) + ", " + str(self.y) + ")"
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
+
+def CountList(L):
+    counted = {}
+    for x in L:
+        if x in counted.keys():
+            counted[x] += 1
+        else:
+            counted[x] = 1
+    return counted
