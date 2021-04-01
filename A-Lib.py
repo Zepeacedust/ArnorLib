@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+"""
+Random stuff sem ég nota oft og nenni ekki að skrifa oft
+"""
+__author__ = "Arnór Friðriksson"
+__version__ = "1.0.0"
+
+
 class TreeNode:
     def __init__(self, data, key=int):
         self.data = data
@@ -11,9 +19,11 @@ class PrioQueue:
         self.root = None
         self.key = key
 
+
     def getEmpty(self):
         return self.root == None
     empty = property(getEmpty)
+
 
     def add(self, data):
         element = TreeNode(data)
@@ -39,15 +49,14 @@ class PrioQueue:
                     else:
                         head = head.right
 
+
     def pop(self):
         # TODO error Handling
-
         head = self.root
         last = None
         while head.left != None:
             last = head
             head = head.left
-
         if last == None:
             self.root = head.right
         else:
@@ -73,6 +82,7 @@ class Vector:
         return self.x == other.x and self.y == other.y
 
 
+# telja öll indexes í lista
 def CountList(L):
     counted = {}
     for x in L:
