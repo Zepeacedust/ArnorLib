@@ -57,6 +57,7 @@ class PrioQueue:
         return data
 
 
+# 2d vector class
 class Vector:
     def __init__(self, x, y):
         self.x = x
@@ -64,9 +65,6 @@ class Vector:
 
     def __add__(self, other):
         return Vector(self.x+other.x, self.y+other.y)
-
-    def BoundsCheck(self, bounds):
-        return 0 <= self.x and self.x < bounds[0] and 0 <= self.y and self.y < bounds[1]
 
     def __str__(self):
         return "(" + str(self.x) + ", " + str(self.y) + ")"
