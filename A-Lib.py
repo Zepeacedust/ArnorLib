@@ -111,6 +111,9 @@ class Vector:
 
     def __mul__(self, other):
         return Vector(self.x * other, self.y * other)
+    
+    def __truediv__(self,other):
+        return Vector(self.x / other, self.y / other)
 
     @property
     def magnitude(self):
@@ -128,7 +131,10 @@ class Vector:
 
     @property
     def normalized(self):
-        return
+        """
+        return this vector scaled to a length of 1
+        """
+        return self / self.magnitude
 
 
 # telja öll indexes í lista
