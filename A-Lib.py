@@ -76,7 +76,8 @@ class PrioQueue:
                     head = head.right
 
     def pop(self):
-        # TODO error Handling
+        if self.root == None:
+            raise IndexError("pop from empty queue")
         head = self.root
         last = None
         while head.left != None:
@@ -111,8 +112,8 @@ class Vector:
 
     def __mul__(self, other):
         return Vector(self.x * other, self.y * other)
-    
-    def __truediv__(self,other):
+
+    def __truediv__(self, other):
         return Vector(self.x / other, self.y / other)
 
     @property
@@ -155,4 +156,4 @@ def CountList(L):
 
 if __name__ == "__main__":
     assert Vector(1, 2) * 3 == Vector(3, 6)
-    assert CountList([1,1,1,1,2,2,2]) == {1:4,2:3}
+    assert CountList([1, 1, 1, 1, 2, 2, 2]) == {1: 4, 2: 3}
