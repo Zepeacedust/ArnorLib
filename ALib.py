@@ -76,8 +76,7 @@ class PrioQueue:
                     head = head.right
 
     def pop(self):
-        if self.root == None:
-            raise IndexError("pop from empty queue")
+        # TODO error Handling
         head = self.root
         last = None
         while head.left != None:
@@ -113,9 +112,6 @@ class Vector:
     def __mul__(self, other):
         return Vector(self.x * other, self.y * other)
 
-    def __truediv__(self, other):
-        return Vector(self.x / other, self.y / other)
-
     @property
     def magnitude(self):
         """
@@ -132,19 +128,11 @@ class Vector:
 
     @property
     def normalized(self):
-        """
-        return this vector scaled to a length of 1
-        """
-        return self / self.magnitude
+        return
 
 
+# telja öll indexes í lista
 def CountList(L):
-    """
-    Args:
-        L: list
-    Returns:
-        Dictionary where keys are indexes in the list and values are how many times they occur
-    """
     counted = {}
     for x in L:
         if x in counted.keys():
@@ -156,4 +144,3 @@ def CountList(L):
 
 if __name__ == "__main__":
     assert Vector(1, 2) * 3 == Vector(3, 6)
-    assert CountList([1, 1, 1, 1, 2, 2, 2]) == {1: 4, 2: 3}
