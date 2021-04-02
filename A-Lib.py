@@ -137,8 +137,13 @@ class Vector:
         return self / self.magnitude
 
 
-# telja öll indexes í lista
 def CountList(L):
+    """
+    Args:
+        L: list
+    Returns:
+        Dictionary where keys are indexes in the list and values are how many times they occur
+    """
     counted = {}
     for x in L:
         if x in counted.keys():
@@ -150,3 +155,4 @@ def CountList(L):
 
 if __name__ == "__main__":
     assert Vector(1, 2) * 3 == Vector(3, 6)
+    assert CountList([1,1,1,1,2,2,2]) == {1:4,2:3}
