@@ -6,8 +6,10 @@ __author__ = "Arnór Friðriksson"
 __version__ = "1.0.0"
 
 import math
+from functools import wraps
 
 def SameClass(func):
+    @wraps(func)
     def SameClassWrapper(self, other):
         if self.__class__ == other.__class__:
             return func(self,other)
@@ -58,6 +60,10 @@ class TreeNode:
     def __ne__(self,other):
         return self.data != other.data
 
+    @property
+    def isLeaf(self):
+        return self.left == None and self.right == None
+
 
 class BinaryTree:
     def __init__(self, key=int):
@@ -94,7 +100,7 @@ class BinaryTree:
         head = self.root
         while True:
             # Finna réttan stað og setja node þar
-            if self.key(element.data) <= self.key(head.data):
+            if element <= head:
                 if head.left == None:
                     head.left = element
                     return 0
@@ -114,7 +120,8 @@ class PrioQueue(BinaryTree):
         BinaryTree.__init__(self, key=int)
 
     def pop(self):
-        # TODO error Handling
+        if self.empty:
+            raise IndexError("pop from empty tree.")
         head = self.root
         last = None
         while head.left != None:
