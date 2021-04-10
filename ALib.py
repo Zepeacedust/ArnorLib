@@ -97,20 +97,47 @@ class Vector:
         self.x = x
         self.y = y
 
-    def __add__(self, other):
-        return Vector(self.x+other.x, self.y+other.y)
-
     def __str__(self):
-        return "(" + str(self.x) + ", " + str(self.y) + ")"
+        return "{}({},{})".format(self.__class__.__name__, self.x, self.y)
 
     def __eq__(self, other):
-        return self.x == other.x and self.y == other.y
+        if other.__class__ == self.__class__:
+            return self.x == other.x and self.y == other.y
+        return False
+
+    def __add__(self, other):
+        if other.__class__ == self.__class__:
+            return Vector(self.x + other.x, self.y + other.y)
+        else:
+            raise TypeError("unsupported operand type(s) for +: '{}' and '{}'".format(
+                self.__class__.__name__, other.__class__.__name__))
 
     def __sub__(self, other):
-        return Vector(self.x-other.x, self.y-other.y)
+        if other.__class__ == self.__class__:
+            return Vector(self.x - other.x, self.y - other.y)
+        else:
+            raise TypeError("unsupported operand type(s) for -: '{}' and '{}'".format(
+                self.__class__.__name__, other.__class__.__name__))
 
     def __mul__(self, other):
-        return Vector(self.x * other, self.y * other)
+        if other.__class__ == self.__class__:
+            return Vector(self.x * other.x, self.y * other.y)
+        elif other.__class__ == int or other.__class__ == float:
+            return Vector(self.x * other, self.y * other)
+        else:
+            raise TypeError("unsupported operand type(s) for *: '{}' and '{}'".format(
+                self.__class__.__name__, other.__class__.__name__))
+
+    def __truediv__(self, other):
+        #division with other Vectors
+        if other.__class__ == self.__class__:
+            return Vector(self.x / other.x, self.y / other.x)
+        #divison with Float or Int
+        elif other.__class__ == int or other.__class__ == float:
+            return Vector(self.x / other, self.y / other)
+        else:
+            raise TypeError("unsupported operand type(s) for /: '{}' and '{}'".format(
+                self.__class__.__name__, other.__class__.__name__))
 
     @property
     def magnitude(self):
@@ -128,7 +155,7 @@ class Vector:
 
     @property
     def normalized(self):
-        return
+        return self / self.magnitude
 
 
 # telja öll indexes í lista
@@ -140,7 +167,6 @@ def CountList(L):
         else:
             counted[x] = 1
     return counted
-
 
 if __name__ == "__main__":
     assert Vector(1, 2) * 3 == Vector(3, 6)
