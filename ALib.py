@@ -143,7 +143,7 @@ class Vector:
         self.y = y
 
     def __str__(self):
-        return "{}({},{})".format(self.__class__.__name__, self.x, self.y)
+        return f"{self.__class__}({self.x},{self.y})"
     
     @SameClass
     def __eq__(self, other):
@@ -154,15 +154,13 @@ class Vector:
         if other.__class__ == self.__class__:
             return Vector(self.x + other.x, self.y + other.y)
         else:
-            raise TypeError("unsupported operand type(s) for +: '{}' and '{}'".format(
-                self.__class__.__name__, other.__class__.__name__))
-
+            raise TypeError(f"unsupported operand type(s) for +: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
+                            
     def __sub__(self, other):
         if other.__class__ == self.__class__:
             return Vector(self.x - other.x, self.y - other.y)
         else:
-            raise TypeError("unsupported operand type(s) for -: '{}' and '{}'".format(
-                self.__class__.__name__, other.__class__.__name__))
+            raise TypeError(f"unsupported operand type(s) for -: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
 
     def __mul__(self, other):
         if other.__class__ == self.__class__:
@@ -170,8 +168,7 @@ class Vector:
         elif other.__class__ == int or other.__class__ == float:
             return Vector(self.x * other, self.y * other)
         else:
-            raise TypeError("unsupported operand type(s) for *: '{}' and '{}'".format(
-                self.__class__.__name__, other.__class__.__name__))
+            raise TypeError(f"unsupported operand type(s) for *: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
 
     def __truediv__(self, other):
         #division with other Vectors
@@ -181,8 +178,7 @@ class Vector:
         elif other.__class__ == int or other.__class__ == float:
             return Vector(self.x / other, self.y / other)
         else:
-            raise TypeError("unsupported operand type(s) for /: '{}' and '{}'".format(
-                self.__class__.__name__, other.__class__.__name__))
+            raise TypeError(f"unsupported operand type(s) for /: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
 
     @property
     def magnitude(self):
@@ -200,6 +196,9 @@ class Vector:
 
     @property
     def normalized(self):
+        """
+        return the vector divided by the magnitude
+        """
         return self / self.magnitude
 
 
