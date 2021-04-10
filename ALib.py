@@ -7,12 +7,20 @@ __version__ = "1.0.0"
 
 import math
 
+def SameClass(func):
+    def SameClassWrapper(self, other):
+        if self.__class__ == other.__class__:
+            return func(self,other)
+        else:
+            return False
+    return SameClassWrapper
+
+
 
 class TreeNode:
     """
     Class fyrir binary tree
     """
-
     def __init__(self, data, key=int):
         """
         Class fyrir binary tree
@@ -25,16 +33,40 @@ class TreeNode:
         self.key = key
         self.left = None
         self.right = None
+    
+    @SameClass
+    def __eq__(self, other):
+        return self.key(self.data) == self.key(other.data)
+
+    @SameClass
+    def __gt__(self, other):
+        return self.key(self.data) > self.key(other.data)
+    
+    @SameClass
+    def __lt__(self, other):
+        return self.key(self.data) < self.key(other.data)
+    
+    @SameClass
+    def __ge__(self, other):
+        return self.data >= other.data
+    
+    @SameClass
+    def __le__(self,other):
+        return self.data <= other.data
+    
+    @SameClass
+    def __ne__(self,other):
+        return self.data != other.data
 
 
-class PrioQueue:
+class BinaryTree:
     def __init__(self, key=int):
         self.root = None
         self.key = key
 
-    def getEmpty(self):
+    @property
+    def empty(self):
         return self.root == None
-    empty = property(getEmpty)
 
     def add(self, data):
         """
@@ -75,6 +107,12 @@ class PrioQueue:
                 else:
                     head = head.right
 
+
+
+class PrioQueue(BinaryTree):
+    def __init__(self, key=int):
+        BinaryTree.__init__(self, key=int)
+
     def pop(self):
         # TODO error Handling
         head = self.root
@@ -99,11 +137,11 @@ class Vector:
 
     def __str__(self):
         return "{}({},{})".format(self.__class__.__name__, self.x, self.y)
-
+    
+    @SameClass
     def __eq__(self, other):
-        if other.__class__ == self.__class__:
-            return self.x == other.x and self.y == other.y
-        return False
+        return self.x == other.x and self.y == other.y
+
 
     def __add__(self, other):
         if other.__class__ == self.__class__:
