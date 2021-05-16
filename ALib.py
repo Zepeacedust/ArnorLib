@@ -6,23 +6,36 @@ __author__ = "Arnór Friðriksson"
 __version__ = "1.0.0"
 
 import math
+import time
 from functools import wraps
+
+
+def Time(func):
+    @wraps(func)
+    def TimeWrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(func.__name__, end-start)
+        return result
+    return TimeWrapper
+
 
 def SameClass(func):
     @wraps(func)
     def SameClassWrapper(self, other):
         if self.__class__ == other.__class__:
-            return func(self,other)
+            return func(self, other)
         else:
             return False
     return SameClassWrapper
-
 
 
 class TreeNode:
     """
     Class fyrir binary tree
     """
+
     def __init__(self, data, key=int):
         """
         Class fyrir binary tree
@@ -35,7 +48,7 @@ class TreeNode:
         self.key = key
         self.left = None
         self.right = None
-    
+
     @SameClass
     def __eq__(self, other):
         return self.key(self.data) == self.key(other.data)
@@ -43,21 +56,21 @@ class TreeNode:
     @SameClass
     def __gt__(self, other):
         return self.key(self.data) > self.key(other.data)
-    
+
     @SameClass
     def __lt__(self, other):
         return self.key(self.data) < self.key(other.data)
-    
+
     @SameClass
     def __ge__(self, other):
         return self.data >= other.data
-    
+
     @SameClass
-    def __le__(self,other):
+    def __le__(self, other):
         return self.data <= other.data
-    
+
     @SameClass
-    def __ne__(self,other):
+    def __ne__(self, other):
         return self.data != other.data
 
     @property
@@ -114,7 +127,6 @@ class BinaryTree:
                     head = head.right
 
 
-
 class PrioQueue(BinaryTree):
     def __init__(self, key=int):
         BinaryTree.__init__(self, key=int)
@@ -144,23 +156,24 @@ class Vector:
 
     def __str__(self):
         return f"{self.__class__}({self.x},{self.y})"
-    
+
     @SameClass
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
-
 
     def __add__(self, other):
         if other.__class__ == self.__class__:
             return Vector(self.x + other.x, self.y + other.y)
         else:
-            raise TypeError(f"unsupported operand type(s) for +: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
-                            
+            raise TypeError(
+                f"unsupported operand type(s) for +: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
+
     def __sub__(self, other):
         if other.__class__ == self.__class__:
             return Vector(self.x - other.x, self.y - other.y)
         else:
-            raise TypeError(f"unsupported operand type(s) for -: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
+            raise TypeError(
+                f"unsupported operand type(s) for -: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
 
     def __mul__(self, other):
         if other.__class__ == self.__class__:
@@ -168,17 +181,19 @@ class Vector:
         elif other.__class__ == int or other.__class__ == float:
             return Vector(self.x * other, self.y * other)
         else:
-            raise TypeError(f"unsupported operand type(s) for *: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
+            raise TypeError(
+                f"unsupported operand type(s) for *: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
 
     def __truediv__(self, other):
-        #division with other Vectors
+        # division with other Vectors
         if other.__class__ == self.__class__:
             return Vector(self.x / other.x, self.y / other.x)
-        #divison with Float or Int
+        # divison with Float or Int
         elif other.__class__ == int or other.__class__ == float:
             return Vector(self.x / other, self.y / other)
         else:
-            raise TypeError(f"unsupported operand type(s) for /: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
+            raise TypeError(
+                f"unsupported operand type(s) for /: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
 
     @property
     def magnitude(self):
@@ -222,12 +237,12 @@ def WeightedMiddle(L):
     Returns:
         any type: the first index of the weighted middle of the list
     """
-    
+
     tip = tail = 0
     tipPos = 0
     tailPos = len(L) - 1
     while tipPos != tailPos:
-        if tail + L[tailPos][1]  < tip + L[tipPos][1]:
+        if tail + L[tailPos][1] < tip + L[tipPos][1]:
             tail += L[tailPos][1]
             tailPos -= 1
         else:
