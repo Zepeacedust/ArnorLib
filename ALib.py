@@ -6,30 +6,8 @@ __author__ = "Arnór Friðriksson"
 __version__ = "1.0.0"
 
 import math
-import time
-from functools import wraps
+import Wrappers
 from typing import Any, Dict, List
-
-
-def Time(func):
-    @wraps(func)
-    def TimeWrapper(*args, **kwargs):
-        start = time.time()
-        result = func(*args, **kwargs)
-        end = time.time()
-        print(func.__name__, end-start)
-        return result
-    return TimeWrapper
-
-
-def SameClass(func):
-    @wraps(func)
-    def SameClassWrapper(self, other):
-        if self.__class__ == other.__class__:
-            return func(self, other)
-        else:
-            return False
-    return SameClassWrapper
 
 
 class TreeNode:
@@ -50,27 +28,27 @@ class TreeNode:
         self.left = None
         self.right = None
 
-    @SameClass
+    @Wrappers.SameClass
     def __eq__(self, other:"TreeNode") -> bool:
         return self.key(self.data) == other.key(other.data)
 
-    @SameClass
+    @Wrappers.SameClass
     def __gt__(self, other:"TreeNode") -> bool:
         return self.key(self.data) > other.key(other.data)
 
-    @SameClass
+    @Wrappers.SameClass
     def __lt__(self, other:"TreeNode") -> bool:
         return self.key(self.data) < other.key(other.data)
 
-    @SameClass
+    @Wrappers.SameClass
     def __ge__(self, other:"TreeNode") -> bool:
         return self.key(self.data) >= other.key(other.data)
 
-    @SameClass
+    @Wrappers.SameClass
     def __le__(self, other:"TreeNode") -> bool:
         return self.key(self.data) <= other.key(other.data)
 
-    @SameClass
+    @Wrappers.SameClass
     def __ne__(self, other:"TreeNode") -> bool:
         return self.key(self.data) != other.key(other.data)
 
@@ -158,7 +136,7 @@ class Vector:
     def __str__(self) -> str:
         return f"{self.__class__.__name__} ({self.x},{self.y})"
 
-    @SameClass
+    @Wrappers.SameClass
     def __eq__(self, other) -> bool:
         return self.x == other.x and self.y == other.y
 
