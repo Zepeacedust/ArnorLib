@@ -8,6 +8,7 @@ __version__ = "1.0.0"
 import math
 import time
 from functools import wraps
+from typing import Any, Dict, List
 
 
 def Time(func):
@@ -30,7 +31,6 @@ def SameClass(func):
             return False
     return SameClassWrapper
 
-
 class TreeNode:
     """
     Class fyrir binary tree
@@ -50,31 +50,31 @@ class TreeNode:
         self.right = None
 
     @SameClass
-    def __eq__(self, other):
-        return self.key(self.data) == self.key(other.data)
+    def __eq__(self, other:"TreeNode") -> bool:
+        return self.key(self.data) == other.key(other.data)
 
     @SameClass
-    def __gt__(self, other):
-        return self.key(self.data) > self.key(other.data)
+    def __gt__(self, other:"TreeNode") -> bool:
+        return self.key(self.data) > other.key(other.data)
 
     @SameClass
-    def __lt__(self, other):
-        return self.key(self.data) < self.key(other.data)
+    def __lt__(self, other:"TreeNode") -> bool:
+        return self.key(self.data) < other.key(other.data)
 
     @SameClass
-    def __ge__(self, other):
-        return self.data >= other.data
+    def __ge__(self, other:"TreeNode") -> bool:
+        return self.key(self.data) >= other.key(other.data)
 
     @SameClass
-    def __le__(self, other):
-        return self.data <= other.data
+    def __le__(self, other:"TreeNode") -> bool:
+        return self.key(self.data) <= other.key(other.data)
 
     @SameClass
-    def __ne__(self, other):
-        return self.data != other.data
+    def __ne__(self, other:"TreeNode") -> bool:
+        return self.key(self.data) != other.key(other.data)
 
     @property
-    def isLeaf(self):
+    def isLeaf(self) -> bool:
         return self.left == None and self.right == None
 
 
@@ -84,10 +84,10 @@ class BinaryTree:
         self.key = key
 
     @property
-    def empty(self):
+    def empty(self) -> bool:
         return self.root == None
 
-    def add(self, data):
+    def add(self, data) -> int:
         """
         Add TreeNode with data to list checking if it is empty 
         """
@@ -98,9 +98,9 @@ class BinaryTree:
             self.root = element
             return 0
         else:
-            self.__addElement(element)
+            return self.__addElement(element)
 
-    def __addElement(self, element):
+    def __addElement(self, element:TreeNode):
         """
         Adds TreeNode element to the queue
 
@@ -154,28 +154,28 @@ class Vector:
         self.x = x
         self.y = y
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.__class__}({self.x},{self.y})"
 
     @SameClass
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return self.x == other.x and self.y == other.y
 
-    def __add__(self, other):
+    def __add__(self, other) -> "Vector":
         if other.__class__ == self.__class__:
             return Vector(self.x + other.x, self.y + other.y)
         else:
             raise TypeError(
                 f"unsupported operand type(s) for +: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
 
-    def __sub__(self, other):
+    def __sub__(self, other) -> "Vector":
         if other.__class__ == self.__class__:
             return Vector(self.x - other.x, self.y - other.y)
         else:
             raise TypeError(
                 f"unsupported operand type(s) for -: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
 
-    def __mul__(self, other):
+    def __mul__(self, other) -> "Vector":
         if other.__class__ == self.__class__:
             return Vector(self.x * other.x, self.y * other.y)
         elif other.__class__ == int or other.__class__ == float:
@@ -184,7 +184,7 @@ class Vector:
             raise TypeError(
                 f"unsupported operand type(s) for *: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
 
-    def __truediv__(self, other):
+    def __truediv__(self, other) -> "Vector":
         # division with other Vectors
         if other.__class__ == self.__class__:
             return Vector(self.x / other.x, self.y / other.x)
@@ -196,21 +196,21 @@ class Vector:
                 f"unsupported operand type(s) for /: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
 
     @property
-    def magnitude(self):
+    def magnitude(self) -> float:
         """
         return the magnitude of the vector
         """
         return math.sqrt(self.sqrMagnitude)
 
     @property
-    def sqrMagnitude(self):
+    def sqrMagnitude(self) -> float:
         """
         return the magnitude squared, considerably faster to be used for comparisons
         """
         return self.x**2 + self.y**2
 
     @property
-    def normalized(self):
+    def normalized(self) -> "Vector":
         """
         return the vector divided by the magnitude
         """
@@ -218,7 +218,7 @@ class Vector:
 
 
 # telja öll indexes í lista
-def CountList(L):
+def CountList(L:list) -> Dict[Any, int]:
     counted = {}
     for x in L:
         if x in counted.keys():
@@ -227,8 +227,7 @@ def CountList(L):
             counted[x] = 1
     return counted
 
-
-def WeightedMiddle(L):
+def WeightedMiddle(L:list) -> List[Any]:
     """find the weighted middle of a list
 
     Args:
@@ -238,7 +237,8 @@ def WeightedMiddle(L):
         any type: the first index of the weighted middle of the list
     """
 
-    tip = tail = 0
+    tip = 0
+    tail = 0
     tipPos = 0
     tailPos = len(L) - 1
     while tipPos != tailPos:
@@ -252,4 +252,4 @@ def WeightedMiddle(L):
 
 
 if __name__ == "__main__":
-    assert Vector(1, 2) * 3 == Vector(3, 6)
+    a =  Vector(1, 2).normalized
