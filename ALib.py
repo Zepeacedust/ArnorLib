@@ -31,6 +31,7 @@ def SameClass(func):
             return False
     return SameClassWrapper
 
+
 class TreeNode:
     """
     Class fyrir binary tree
@@ -155,7 +156,7 @@ class Vector:
         self.y = y
 
     def __str__(self) -> str:
-        return f"{self.__class__}({self.x},{self.y})"
+        return f"{self.__class__.__name__} ({self.x},{self.y})"
 
     @SameClass
     def __eq__(self, other) -> bool:
@@ -215,6 +216,14 @@ class Vector:
         return the vector divided by the magnitude
         """
         return self / self.magnitude
+    def copy(self) -> "Vector":
+        """
+        Shallow copy of self
+
+        Returns:
+            Vector: A copy of self
+        """ 
+        return self.__class__(self.x, self.y)
 
 
 # telja öll indexes í lista
@@ -231,10 +240,10 @@ def WeightedMiddle(L:list) -> List[Any]:
     """find the weighted middle of a list
 
     Args:
-        L (List): list of tuples, the first index is the data and the second is the weight
+        L: list of tuples, the first index is the data and the second is the weight
 
     Returns:
-        any type: the first index of the weighted middle of the list
+        Any: the first index of the weighted middle of the list
     """
 
     tip = 0
