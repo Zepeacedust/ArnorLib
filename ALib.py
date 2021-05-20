@@ -195,6 +195,17 @@ class Vector:
         else:
             raise TypeError(
                 f"unsupported operand type(s) for /: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
+    
+    def clamp(self, size:float = 1.0) -> "Vector":
+        """
+        crop the vector to a box  size Size
+
+        Returns:
+            Vector: The cropped Vector
+        """
+        if self.x < self.y:
+            return self / (self.y * size)
+        return self / (self.x * size)
 
     @property
     def magnitude(self) -> float:
@@ -261,4 +272,4 @@ def WeightedMiddle(L:list) -> List[Any]:
 
 
 if __name__ == "__main__":
-    a =  Vector(1, 2).normalized
+    print(Vector(1, 2).clamp())
