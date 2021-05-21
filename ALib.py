@@ -9,7 +9,16 @@ from typing import Any, Dict, List
 
 
 # telja öll indexes í lista
-def CountList(L:list) -> Dict[Any, int]:
+def CountList(L: list) -> Dict[Any, int]:
+    """
+    Count the number of occurances of each index
+
+    Args:
+        L (list): The input List
+
+    Returns:
+        Dict[Any, int]: A dictionary of indexes and how often they occur.
+    """
     counted = {}
     for x in L:
         if x in counted.keys():
@@ -18,7 +27,8 @@ def CountList(L:list) -> Dict[Any, int]:
             counted[x] = 1
     return counted
 
-def WeightedMiddle(L:list) -> List[Any]:
+
+def WeightedMiddle(L: list) -> List[Any]:
     """find the weighted middle of a list
 
     Args:
