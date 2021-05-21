@@ -8,6 +8,7 @@ __version__ = "1.0.0"
 from functools import wraps
 import time
 
+
 def Time(func):
     @wraps(func)
     def TimeWrapper(*args, **kwargs):

@@ -9,9 +9,6 @@ import math
 import Wrappers
 
 
-
-
-
 # 2d vector class
 class Vector:
     def __init__(self, x, y):
@@ -58,8 +55,8 @@ class Vector:
         else:
             raise TypeError(
                 f"unsupported operand type(s) for /: '{self.__class__.__name__}' and '{other.__class__.__name__}'")
-    
-    def clamp(self, size:float = 1.0) -> "Vector":
+
+    def clamp(self, size: float = 1.0) -> "Vector":
         """
         crop the vector to a box  size Size
 
@@ -90,11 +87,12 @@ class Vector:
         return the vector divided by the magnitude
         """
         return self / self.magnitude
+
     def copy(self) -> "Vector":
         """
         Shallow copy of self
 
         Returns:
             Vector: A copy of self
-        """ 
+        """
         return self.__class__(self.x, self.y)
