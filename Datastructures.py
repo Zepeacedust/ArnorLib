@@ -26,6 +26,16 @@ class TreeNode:
         self.left = None
         self.right = None
 
+    
+    def __str__(self) -> str:
+        pre = ""
+        post = ""
+        if self.left != None:
+            pre = str(self.left)
+        if self.right != None:
+            post = str(self.right)
+        return ", ".join([pre, str(self.data), post])    
+    
     @Wrappers.SameClass
     def __eq__(self, other:"TreeNode") -> bool:
         return self.key(self.data) == other.key(other.data)
@@ -46,9 +56,8 @@ class TreeNode:
     def __le__(self, other:"TreeNode") -> bool:
         return self.key(self.data) <= other.key(other.data)
 
-    @Wrappers.SameClass
     def __ne__(self, other:"TreeNode") -> bool:
-        return self.key(self.data) != other.key(other.data)
+        return not self == other
 
     @property
     def isLeaf(self) -> bool:
@@ -61,14 +70,14 @@ class BinaryTree:
         self.key = key
 
     @property
-    def empty(self) -> bool:
+    def isEmpty(self) -> bool:
         return self.root == None
 
     def add(self, data) -> int:
         """
         Add TreeNode with data to list checking if it is empty 
         """
-        element = TreeNode(data)
+        element = TreeNode(data, key = self.key)
         # Classic add í Binary tree
         if self.root == None:
             # Ef tré er tómt
@@ -76,6 +85,8 @@ class BinaryTree:
             return 0
         else:
             return self.__addElement(element)
+    def __str__(self) -> str:
+        return str(self.root)
 
     def __addElement(self, element:TreeNode):
         """
@@ -106,10 +117,10 @@ class BinaryTree:
 
 class PrioQueue(BinaryTree):
     def __init__(self, key=int):
-        BinaryTree.__init__(self, key=int)
+        BinaryTree.__init__(self, key=key)
 
     def pop(self):
-        if self.empty:
+        if self.isEmpty:
             raise IndexError("pop from empty tree.")
         head = self.root
         last = None
