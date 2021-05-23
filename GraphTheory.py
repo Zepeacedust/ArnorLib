@@ -7,12 +7,15 @@ class Connection:
         self.End = end
         self.Weight = weight
 
+
 class Node:
     def __init__(self, connections, name):
         self.Connections = connections
         self.Name = name
+
     def __str__(self) -> str:
         return self.Name
+
 
 class PathfindingNode(Node):
     def __init__(self, connections, name):
@@ -20,16 +23,16 @@ class PathfindingNode(Node):
         self.Distance = -1
         self.Root = None
         self.visited = False
-    
-    
+
+
 class Graph:
     def __init__(self, Nodes):
         self.Nodes = Nodes
-        
+
     def __getitem__(self, index):
         return self.Nodes[index]
-    
-    def FindRoute(self, start:PathfindingNode, end:PathfindingNode):
+
+    def FindRoute(self, start: PathfindingNode, end: PathfindingNode):
         for node in self.Nodes:
             node.Distance = -1
             node.Root = None

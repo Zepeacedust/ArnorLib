@@ -8,6 +8,7 @@ __version__ = "1.0.0"
 
 import Wrappers
 
+
 class TreeNode:
     """
     Class fyrir binary tree
@@ -26,7 +27,6 @@ class TreeNode:
         self.left = None
         self.right = None
 
-    
     def __str__(self) -> str:
         pre = ""
         post = ""
@@ -34,29 +34,29 @@ class TreeNode:
             pre = str(self.left)
         if self.right != None:
             post = str(self.right)
-        return ", ".join([pre, str(self.data), post])    
-    
+        return ", ".join([pre, str(self.data), post])
+
     @Wrappers.SameClass
-    def __eq__(self, other:"TreeNode") -> bool:
+    def __eq__(self, other: "TreeNode") -> bool:
         return self.key(self.data) == other.key(other.data)
 
     @Wrappers.SameClass
-    def __gt__(self, other:"TreeNode") -> bool:
+    def __gt__(self, other: "TreeNode") -> bool:
         return self.key(self.data) > other.key(other.data)
 
     @Wrappers.SameClass
-    def __lt__(self, other:"TreeNode") -> bool:
+    def __lt__(self, other: "TreeNode") -> bool:
         return self.key(self.data) < other.key(other.data)
 
     @Wrappers.SameClass
-    def __ge__(self, other:"TreeNode") -> bool:
+    def __ge__(self, other: "TreeNode") -> bool:
         return self.key(self.data) >= other.key(other.data)
 
     @Wrappers.SameClass
-    def __le__(self, other:"TreeNode") -> bool:
+    def __le__(self, other: "TreeNode") -> bool:
         return self.key(self.data) <= other.key(other.data)
 
-    def __ne__(self, other:"TreeNode") -> bool:
+    def __ne__(self, other: "TreeNode") -> bool:
         return not self == other
 
     @property
@@ -77,7 +77,7 @@ class BinaryTree:
         """
         Add TreeNode with data to list checking if it is empty 
         """
-        element = TreeNode(data, key = self.key)
+        element = TreeNode(data, key=self.key)
         # Classic add í Binary tree
         if self.root == None:
             # Ef tré er tómt
@@ -85,10 +85,11 @@ class BinaryTree:
             return 0
         else:
             return self.__addElement(element)
+
     def __str__(self) -> str:
         return str(self.root)
 
-    def __addElement(self, element:TreeNode):
+    def __addElement(self, element: TreeNode):
         """
         Adds TreeNode element to the queue
 

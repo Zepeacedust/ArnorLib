@@ -20,6 +20,7 @@ def Time(func):
     return TimeWrapper
 
 
+@Time
 def SameClass(func):
     @wraps(func)
     def SameClassWrapper(self, other):
