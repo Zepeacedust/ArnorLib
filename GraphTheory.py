@@ -49,28 +49,3 @@ class Graph:
         while path[-1].Root != None:
             path.append(path[-1].Root)
         return path[::-1]
-                            
-world = Graph([
-    PathfindingNode([],"0"),
-    PathfindingNode([],"1"),
-    PathfindingNode([],"2"),
-    PathfindingNode([],"3"),
-    PathfindingNode([],"4"),
-    PathfindingNode([],"5")
-])
-
-
-
-
-world[0].Connections.append(Connection(world[1],70))
-world[0].Connections.append(Connection(world[2],9))
-world[1].Connections.append(Connection(world[3],7))
-world[2].Connections.append(Connection(world[4],90))
-world[3].Connections.append(Connection(world[4],9))
-
-
-print(*world.Nodes)
-shortestPath = world.FindRoute(world[0],world[4])
-print(*shortestPath)
-
-print(shortestPath[-1].Distance)
