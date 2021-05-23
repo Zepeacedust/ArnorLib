@@ -39,7 +39,7 @@ def mergeLists(a: List[List], key=int) -> List[List]:
     outLists = []
 
     while a != []:
-        outLists.append(merge(a.pop(), a.pop()), key=key)
+        outLists.append(merge(a.pop(), a.pop(), key=key))
 
     return outLists
 
