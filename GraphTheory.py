@@ -1,6 +1,3 @@
-from PIL import Image
-
-
 from typing import List
 from Datastructures import PrioQueue
 
@@ -22,6 +19,7 @@ class PathfindingNode(Node):
         Node.__init__(self, connections, name)
         self.Distance = -1
         self.Root = None
+        self.visited = False
     
     
 class Graph:
@@ -38,8 +36,9 @@ class Graph:
         start.Distance = 0
         availableTiles = PrioQueue(key=lambda x: x.Distance)
         availableTiles.add(start)
-        while end.Distance == -1 and not availableTiles.isEmpty:
+        while not end.visited and not availableTiles.isEmpty:
             operatingNode = availableTiles.pop()
+            operatingNode.visited = True
             for connection in operatingNode.Connections:
                 newNode = connection.End
                 if newNode.Distance == -1 or operatingNode.Distance + connection.Weight < newNode.Distance:
@@ -55,16 +54,23 @@ world = Graph([
     PathfindingNode([],"0"),
     PathfindingNode([],"1"),
     PathfindingNode([],"2"),
-    PathfindingNode([],"3")
+    PathfindingNode([],"3"),
+    PathfindingNode([],"4"),
+    PathfindingNode([],"5")
 ])
 
-world[0].Connections.append(Connection(world[1],7))
-world[0].Connections.append(Connection(world[3],1))
-world[1].Connections.append(Connection(world[2],1))
-world[3].Connections.append(Connection(world[2],1))
+
+
+
+world[0].Connections.append(Connection(world[1],70))
+world[0].Connections.append(Connection(world[2],9))
+world[1].Connections.append(Connection(world[3],7))
+world[2].Connections.append(Connection(world[4],90))
+world[3].Connections.append(Connection(world[4],9))
+
 
 print(*world.Nodes)
-shortestPath = world.FindRoute(world[0],world[2])
+shortestPath = world.FindRoute(world[0],world[4])
 print(*shortestPath)
 
 print(shortestPath[-1].Distance)
