@@ -10,11 +10,23 @@ from typing import List
 
 
 def merge(a: List, b: List, key=int) -> List:
+    """
+    Merge two sorted lists by key
+
+    Args:
+        a (List): List A
+        b (List): List B 
+        key (function, optional): key to sort by. Defaults to int.
+
+    Returns:
+        List: Merged List
+    """     
+    
     aPos = bPos = 0
     aLen = len(a)
     bLen = len(b)
     outList = []
-
+    #zip together the lists
     while aPos < aLen and bPos < bLen:
         if key(a[aPos]) < key(b[bPos]):
             outList.append(a[aPos])
