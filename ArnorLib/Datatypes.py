@@ -48,7 +48,7 @@ class Vector:
     def __truediv__(self, other) -> "Vector":
         # division with other Vectors
         if other.__class__ == self.__class__:
-            return Vector(self.x / other.x, self.y / other.x)
+            return Vector(self.x / other.x, self.y / other.y)
         # divison with Float or Int
         elif other.__class__ == int or other.__class__ == float:
             return Vector(self.x / other, self.y / other)
