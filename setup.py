@@ -14,7 +14,7 @@ with open(path.join(HERE, 'README.md'), encoding='utf-8') as f:
 
 # This call to setup() does all the work
 setup(
-    name="ALib",
+    name="ArnorLib",
     version="1.0.0",
     description="Random things",
     long_description=long_description,
@@ -34,7 +34,7 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Operating System :: OS Independent"
     ],
-    packages=["ALib"],
+    packages=["ArnorLib"],
     include_package_data=True,
     install_requires=[]
 )
