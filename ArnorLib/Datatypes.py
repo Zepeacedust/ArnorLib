@@ -3,7 +3,6 @@
 Random datatypes sem ég nota oft og nenni ekki að skrifa oft
 """
 __author__ = "Arnór Friðriksson"
-__version__ = "1.0.1"
 
 import math
 from ArnorLib import Wrappers

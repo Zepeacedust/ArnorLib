@@ -3,7 +3,6 @@
 utilities til að gera sorting algorithms
 """
 __author__ = "Arnór Friðriksson"
-__version__ = "1.0.1"
 
 
 from typing import List
