@@ -3,7 +3,7 @@
 Random wrappers sem ég nota oft og nenni ekki að skrifa oft
 """
 __author__ = "Arnór Friðriksson"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 from functools import wraps
 import time

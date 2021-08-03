@@ -3,7 +3,7 @@
 Random datastructures sem ég nota oft og nenni ekki að skrifa oft
 """
 __author__ = "Arnór Friðriksson"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 from ArnorLib import Wrappers
