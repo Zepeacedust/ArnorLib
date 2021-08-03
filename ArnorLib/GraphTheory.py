@@ -1,5 +1,5 @@
 from typing import List
-from Datastructures import PrioQueue
+from ArnorLib.Datastructures import PrioQueue
 
 
 class Connection:

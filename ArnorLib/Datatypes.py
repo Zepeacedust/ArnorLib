@@ -6,7 +6,7 @@ __author__ = "Arnór Friðriksson"
 __version__ = "1.0.0"
 
 import math
-import Wrappers
+from ArnorLib import Wrappers
 
 
 # 2d vector class

@@ -6,7 +6,7 @@ __author__ = "Arnór Friðriksson"
 __version__ = "1.0.0"
 
 
-import Wrappers
+from ArnorLib import Wrappers
 
 
 class TreeNode:
